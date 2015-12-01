@@ -44,20 +44,6 @@
 						</div>
 						
 						<div class="col-md-12 form-group required">
-							<%= f.label :latitude, :class => "control-label col-md-4" %>
-							<div class="col-md-8">
-								<%= f.text_field :latitude, :class => "form-control", :id => "txtLatitude", :placeholder => "Enter Latitude", :autocomplete => "off", :title => "Enter Latitude", "data-toggle" => "quicklook" %>
-							</div>
-						</div>
-						
-						<div class="col-md-12 form-group required">
-							<%= f.label :longitude, :class => "control-label col-md-4" %>
-							<div class="col-md-8">
-								<%= f.text_field :longitude, :class => "form-control", :id => "txtLongitude", :placeholder => "Enter Longitude", :autocomplete => "off", :title => "Enter your Longitude", "data-toggle" => "quicklook" %>
-							</div>
-						</div>
-						
-						<div class="col-md-12 form-group required">
 							<%= f.label :simages, "Upload Image(s)", :class => "control-label col-md-4" %>
 							<div class="col-md-8">
 								<%  
@@ -66,6 +52,9 @@
 								<%= f.file_field :image, :class => "form-control file-field iAttach", :id => "fileAttachment", :ref => "Attachment", :multiple => true, :accept => "#{acceptor}" %>
 							</div>
 						</div>
+						
+						<%= f.hidden_field :latitude, :class => "form-control", :id => "txtLatitude", :placeholder => "Enter Latitude", :autocomplete => "off", :title => "Enter Latitude", "data-toggle" => "quicklook" %>
+						<%= f.hidden_field :longitude, :class => "form-control", :id => "txtLongitude", :placeholder => "Enter Longitude", :autocomplete => "off", :title => "Enter your Longitude", "data-toggle" => "quicklook" %>
 						
 						<div class="col-md-12 pad-top-5">
 							<center>
@@ -102,25 +91,46 @@
 	
 	$(document).ready(function(){
 		
-		$(document.body).on("blur", "#txtLatitude, #txtLongitude", function(e){
+		$(document.body).on("blur", "#txtShopAddress", function(e){
 			
-			if ($("#txtLatitude").val() != "" && $("#txtLongitude").val() != "") {
-				
-				handler.buildMap({ internal: {id: 'map'}}, function(){
-				  markers = handler.addMarkers([
-				    {
-				      "lat": $("#txtLatitude").val(),
-				      "lng": $("#txtLongitude").val(),
-				      "infowindow": "Selected Location"
-				    }
-				  ]);
-				  handler.bounds.extendWith(markers);
-				  handler.fitMapToBounds();
-				  handler.getMap().setZoom(12);    // set the default zoom of the map
+			var geocoder = new google.maps.Geocoder(); 
+			
+			$("#txtLatitude, #txtLongitude").val("");
+			
+			geocoder.geocode({
+					address : $("#txtShopAddress").val(), 
+					region: 'no' 
+				},
+			    function(results, status) {
+			    	if (status.toLowerCase() == 'ok') {
+						// Get center
+						var coords = new google.maps.LatLng(
+							results[0]['geometry']['location'].lat(),
+							results[0]['geometry']['location'].lng()
+						);
+	 					
+	 					handler.buildMap({ internal: {id: 'map'}}, function(){
+	 					
+							markers = handler.addMarkers([
+						    	{
+							      "lat": coords.lat(),
+							      "lng": coords.lng(),
+							      "infowindow": $("#txtShopAddress").val()
+							    }
+							]);
+							
+							handler.bounds.extendWith(markers);
+				  			handler.fitMapToBounds();
+				  			handler.getMap().setZoom(12);
+			  			
+			  			});	
+			  			
+			  			$("#txtLatitude").val(coords.lat());
+			  			$("#txtLongitude").val(coords.lng());
+	 
+			    	}
+			    	
 				});
-				
-			}
-			
 		});
 		
 	});
@@ -157,17 +167,10 @@
             error += "* Address * <br />";
             ids.push("#txtShopAddress");
         }
-        
-        if ($("#txtLatitude").val() == "") {
+        else if ($("#txtLatitude").val() == "" || $("#txtLongitude").val() == "") {
         	count += 1;
-            error += "* Latitude * <br />";
-            ids.push("#txtLatitude");
-        }
-        
-        if ($("#txtLongitude").val() == "") {
-        	count += 1;
-            error += "* Longitude * <br />";
-            ids.push("#txtLongitude");
+            error += "* Please enter correct address to mark your location. * <br />";
+            ids.push("#txtShopAddress");
         }
         
         if ($("#fileAttachment").val() == "") {
