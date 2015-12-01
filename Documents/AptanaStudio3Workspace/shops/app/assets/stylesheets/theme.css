@@ -1,0 +1,384 @@
+.navbar-header {
+	height: 100px;	
+}
+
+.navbar-brand {
+	padding: 8px 15px;	
+}
+
+.header {
+	border-bottom: 1px solid #ccc;	
+	background: #fff;
+}
+
+.container-fix {
+    margin: 120px 0px;
+    padding-bottom: 45px;
+}
+
+.nav.navbar-nav > li > a:hover, .nav.navbar-nav > li > a:focus {
+	background: transparent;
+}
+
+.nav.navbar-nav:not(.navbar-right) > li > a:hover, .nav.navbar-nav:not(.navbar-right) > li > a:focus, .nav.navbar-nav:not(.navbar-right) > li.active > a {
+	background: transparent;
+	border-bottom: 2px solid #12C2EE;
+}
+
+.nav.navbar-nav .open > a, .nav.navbar-nav .open > a:hover, .nav.navbar-nav .open > a:focus {
+	background: transparent;
+}
+
+.nav.navbar-nav .dropdown-menu {
+	margin-top: 20px;	
+}
+
+.content-wrapper {
+	background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    width: 98%;
+    position: absolute;
+}
+
+.Menu {
+	width: 620px;
+}
+
+/* REGION:Padding Helper */
+.pad-0 {
+	padding: 0 !important;
+}
+.pad-top-0 {
+	padding-top: 0px !important;
+}
+.pad-right-0 {
+	padding-right: 0px !important;
+}
+.pad-bottom-0 {
+	padding-bottom: 0px !important;
+}
+.pad-left-0 {
+	padding-left: 0px !important;
+}
+.pad-5 {
+	padding: 5px !important;
+}
+.pad-top-5 {
+	padding-top: 5px !important;
+}
+.pad-right-5 {
+	padding-right: 5px !important;
+}
+.pad-bottom-5 {
+	padding-bottom: 5px !important;
+}
+.pad-left-5 {
+	padding-left: 5px !important;
+}
+.pad-10 {
+	padding: 10px !important;
+}
+.pad-top-10 {
+	padding-top: 10px !important;
+}
+.pad-right-10 {
+	padding-right: 10px !important;
+}
+.pad-bottom-10 {
+	padding-bottom: 10px !important;
+}
+.pad-left-10 {
+	padding-left: 10px !important;
+}
+.pad-15 {
+	padding: 15px !important;
+}
+.pad-top-15 {
+	padding-top: 15px !important;
+}
+.pad-right-15 {
+	padding-right: 15px !important;
+}
+.pad-bottom-15 {
+	padding-bottom: 15px !important;
+}
+.pad-left-15 {
+	padding-left: 15px !important;
+}
+.pad-30 {
+	padding: 30px !important;
+}
+.pad-top-30 {
+	padding-top: 30px !important;
+}
+.pad-right-30 {
+	padding-right: 30px !important;
+}
+.pad-bottom-30 {
+	padding-bottom: 30px !important;
+}
+.pad-left-30 {
+	padding-left: 30px !important;
+}
+/* END REGION:Padding Helper */
+/* REGION:Margin Helper */
+.mar-0 {
+	margin: 0px !important;
+}
+.mar-top-0 {
+	margin-top: 0px !important;
+}
+.mar-right-0 {
+	margin-right: 0px !important;
+}
+.mar-bottom-0 {
+	margin-bottom: 0px !important;
+}
+
+.mar-5 {
+	margin: 5px !important;
+}
+.mar-top-5 {
+	margin-top: 5px !important;
+}
+.mar-right-5 {
+	margin-right: 5px !important;
+}
+.mar-bottom-5 {
+	margin-bottom: 5px !important;
+}
+.mar-left-5 {
+	margin-left: 5px !important;
+}
+.mar-10 {
+	margin: 10px !important;
+}
+.mar-top-10 {
+	margin-top: 10px !important;
+}
+.mar-right-10 {
+	margin-right: 10px !important;
+}
+.mar-bottom-10 {
+	margin-bottom: 10px !important;
+}
+.mar-left-10 {
+	margin-left: 10px !important;
+}
+.mar-15 {
+	margin: 15px !important;
+}
+.mar-top-15 {
+	margin-top: 15px !important;
+}
+.mar-right-15 {
+	margin-right: 15px !important;
+}
+.mar-bottom-15 {
+	margin-bottom: 15px !important;
+}
+.mar-left-15 {
+	margin-left: 15px !important;
+}
+.mar-20 {
+	margin: 20px !important;
+}
+.mar-top-20 {
+	margin-top: 20px !important;
+}
+.mar-right-20 {
+	margin-right: 20px !important;
+}
+.mar-bottom-20 {
+	margin-bottom: 20px !important;
+}
+.mar-left-20 {
+	margin-left: 20px !important;
+}
+.mar-30 {
+	margin: 30px !important;
+}
+.mar-top-30 {
+	margin-top: 30px !important;
+}
+.mar-bottom-30 {
+	margin-bottom: 30px !important;
+}
+.mar-top-35 {
+	margin-top: 35px !important;
+}
+.mar-top-45 {
+	margin-top: 45px !important;
+}
+.mar-right-45 {
+	margin-right: 45px !important;
+}
+.mar-top-65 {
+	margin-top: 65px !important;
+}
+
+.auto-hite {
+	height: auto !important;
+	min-height: 1px !important;
+}
+.auto-wide {
+	width: auto !important;
+	min-width: 1px !important;
+}
+.hite-100 {
+	height: 100px !important;
+}
+.hite-400 {
+	height: 400px !important;
+}
+
+.hite-40 {
+	height: 40px !important;
+}
+
+.hite-48 {
+	height: 48px !important;
+}
+
+.wide-120 {
+	width: 120px !important;
+}
+
+.wide-100 {
+	width: 100% !important;
+}
+
+.wide-98 {
+	width: 98% !important;
+}
+
+.wide-75 {
+	width: 75% !important;
+}
+
+.wide-50 {
+	width: 50% !important;
+}
+
+.wide-25 {
+	width: 25% !important;
+}
+
+.wide-33 {
+	width: 33.33% !important;
+}
+
+.wide-90 {
+	width: 90% !important;
+}
+
+.bot-10 {
+	bottom: 10px !important;
+}
+
+.no-border {
+	border: none !important;
+}
+
+.no-min-hite {
+	min-height: 1px !important;
+}
+
+/* END REGION:Margin Helper */
+
+/* REGION : Global Message Box */
+
+.alert.msg-growl {
+	width: 60% !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-radius: 10px;
+	font-size: 16px !important;
+	text-align: center !important;
+}
+
+.alert.msg-growl .close {
+	float: none !important;
+	position: initial !important;
+}
+
+.alert.msg-growl:after {	
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	right: -31px;
+	top: 0;
+	border: 15px solid transparent;
+	border-top: none;
+	border-left: 15px solid;
+}
+
+.alert.msg-growl:before{	
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	left: -31px;
+	top: 0;
+	border: 15px solid transparent;
+	border-top: none;
+	border-right: 15px solid;
+}
+
+/* END REGION : Global Message Box */
+
+/* REGION : Required Field Support */
+
+.form-group.required .control-label:after {
+  content : "*";
+  color : red;
+  font-size : 14px;
+  padding-left: 5px;
+}
+
+p.required {
+  color: red;
+  font-size: 14px;
+  padding: 10px 0px 0px 30px;
+  float: left;
+}
+
+/* END REGION : Required Field Support */
+
+/* REGION:Loding Helper */
+.Overlay {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	background-color: white;
+	z-index: 1050;
+	opacity: 0.6;
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	min-height: 100%;
+	width: 100%;
+}
+.Loading {
+	font-family: Arial;
+	font-size: 10pt;
+	width: 200px;
+	height: 100px;
+	display: none;
+	position: fixed;
+	background: transparent url("Loader.GIF") 50% 50% no-repeat;
+	z-index: 1051;
+}
+
+.Loading p {
+	margin-top: 90px;
+	font-weight: bold;
+}
+
+/* END REGION:Loding Helper */

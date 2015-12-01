@@ -1,0 +1,10 @@
+# REGION : Mime Types for Images #
+
+ bmp: "image/bmp"
+ pic: "image/x-pict"
+ png: "image/png"
+ tiff: "image/tiff"
+ jpg: "image/jpeg"
+ jpeg: "image/jpeg"
+
+# END REGION : Mime Types for Images #

@@ -1,0 +1,19 @@
+<%= remotipart_response do %>
+
+	var Status = "<%= @status.html_safe %>";
+	
+	if (Status.search("Sorry!!") == 0) {
+		
+		MsgShow("error", Status.split("Sorry!!")[1]);	
+		LoadingHelper(0,"");
+		
+	} 
+	else {			
+			
+        LoadingHelper(1, "Loading list of Shops...");	
+        MsgShow("success", Status.split("$")[0]);
+		window.location.href = "<%= url_for(:controller => "shop", :action => "index") %>";
+		
+	}
+		
+<% end %>

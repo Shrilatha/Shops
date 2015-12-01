@@ -1,0 +1,62 @@
+<!-- REGION : Tabs Helper for Highlighting Active Tab -->
+
+<%- content_for :tabs do -%>
+
+	<%= tabs(1) %>
+	
+<%- end -%>
+
+<!-- END REGION : Tabs Helper for Highlighting Active Tab -->
+
+<div class="col-md-12 mar-bottom-10">
+	<button type="button" class="btn btn-default" onclick="window.location.href = '<%= url_for(:controller => "shop", :action => "index") %>'";>
+		<i class="fa fa-table pad-right-5"></i>
+		Table View
+	</button>
+</div>
+
+<div class="col-md-12">
+	<div id="map" style='width: auto; height: 450px;'></div>
+</div>
+
+<% @shops.each do |shop| %>
+
+	<div id="divInfo<%= shop.id %>" style="display: none">
+		
+		<div style='width: 300px;'>
+			<div class='col-md-6'>
+				<img src='<%= shop.shop_images.first.image.url %>' style='height: 180px; width: 150px'/>
+			</div>
+			<div class='col-md-5 mar-left-10'>
+				<h5 class='text-info'><%= shop.name %></h5>
+				<p class='text-muted'><%= shop.address %></p>
+			</div>
+		</div>
+		
+	</div>
+	
+<% end %>
+
+<script type="text/javascript">
+	
+	handler = Gmaps.build('Google');
+	handler.buildMap({ internal: {id: 'map'}}, function(){
+	
+		<% @shops.each do |shop| %>
+			
+		  	markers = handler.addMarkers([
+		    	{
+			      "lat": "<%= shop.latitude %>",
+			      "lng": "<%= shop.longitude %>",
+			      "infowindow": $("#divInfo<%= shop.id %>").html()
+			    }
+			]);
+			
+			handler.bounds.extendWith(markers);
+  			handler.fitMapToBounds();
+			
+		<% end %>
+		
+	});
+
+</script>

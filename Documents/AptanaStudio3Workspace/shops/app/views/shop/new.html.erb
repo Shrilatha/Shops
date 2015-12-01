@@ -1,0 +1,190 @@
+<!-- REGION : Tabs Helper for Highlighting Active Tab -->
+
+<%- content_for :tabs do -%>
+
+	<%= tabs(2) %>
+		
+<%- end -%>
+
+<!-- END REGION : Tabs Helper for Highlighting Active Tab -->
+
+<div class="row">
+	
+	<div class="col-md-12">
+		
+		<div class="content-wrapper">
+			
+			<h4 class="text-center text-bold text-primary">Register New Shop</h4>
+			
+			<div class="mar-top-30">
+			
+				<div id="divRegisterNew" class="col-md-6">
+					
+					<%= form_for(:shop, :url => {:controller => "shop", :action => "create"}, :html => {:class => 'form-horizontal', :multipart => true }, :remote => true) do |f| %>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :sname, "Shop Name", :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%= f.text_field :name, :class => "form-control", :id => "txtShopName", :placeholder => "Enter your Shop Name", :autocomplete => "off", :title => "Enter your Shop Name", "data-toggle" => "quicklook" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :description, :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%= f.text_area :desc, :class => "form-control", :id => "txtShopDesc", :rows => 4, :placeholder => "Enter your Shop Description", :autocomplete => "off", :title => "Enter your Shop Description", "data-toggle" => "quicklook" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :address, :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%= f.text_area :address, :class => "form-control", :id => "txtShopAddress", :rows => 4, :placeholder => "Enter your Shop Address", :autocomplete => "off", :title => "Enter your Shop Address", "data-toggle" => "quicklook" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :latitude, :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%= f.text_field :latitude, :class => "form-control", :id => "txtLatitude", :placeholder => "Enter Latitude", :autocomplete => "off", :title => "Enter Latitude", "data-toggle" => "quicklook" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :longitude, :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%= f.text_field :longitude, :class => "form-control", :id => "txtLongitude", :placeholder => "Enter Longitude", :autocomplete => "off", :title => "Enter your Longitude", "data-toggle" => "quicklook" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 form-group required">
+							<%= f.label :simages, "Upload Image(s)", :class => "control-label col-md-4" %>
+							<div class="col-md-8">
+								<%  
+									acceptor = "#{APP_CONFIG['jpg']},#{APP_CONFIG['jpeg']},#{APP_CONFIG['png']},#{APP_CONFIG['tiff']},#{APP_CONFIG['pic']},#{APP_CONFIG['bmp']}"
+								%>
+								<%= f.file_field :image, :class => "form-control file-field iAttach", :id => "fileAttachment", :ref => "Attachment", :multiple => true, :accept => "#{acceptor}" %>
+							</div>
+						</div>
+						
+						<div class="col-md-12 pad-top-5">
+							<center>
+								<button type="submit" class="btn btn-success" onclick="return fnValidateForm();">
+									<i class="fa fa-plus pad-right-5"></i>
+									Create
+								</button>
+							</center>
+						</div>
+					
+					<% end %>
+					
+				</div>
+				
+				<div class="col-md-6">
+					<div id="map" style='width: auto; height: 400px;'></div>
+				</div>
+  			
+  			</div>
+		
+		</div>
+		
+	</div>
+	
+</div>
+
+<script type="text/javascript">
+	
+	var handler = Gmaps.build('Google');
+	handler.buildMap({ internal: {id: 'map'} }, function(){
+	  if(navigator.geolocation)
+	    navigator.geolocation.getCurrentPosition(displayOnMap);
+	});
+	
+	$(document).ready(function(){
+		
+		$(document.body).on("blur", "#txtLatitude, #txtLongitude", function(e){
+			
+			if ($("#txtLatitude").val() != "" && $("#txtLongitude").val() != "") {
+				
+				handler.buildMap({ internal: {id: 'map'}}, function(){
+				  markers = handler.addMarkers([
+				    {
+				      "lat": $("#txtLatitude").val(),
+				      "lng": $("#txtLongitude").val(),
+				      "infowindow": "Selected Location"
+				    }
+				  ]);
+				  handler.bounds.extendWith(markers);
+				  handler.fitMapToBounds();
+				  handler.getMap().setZoom(12);    // set the default zoom of the map
+				});
+				
+			}
+			
+		});
+		
+	});
+	
+	function displayOnMap(position){
+	  var marker = handler.addMarker({
+	    lat: position.coords.latitude,
+	    lng: position.coords.longitude
+	  });
+	  handler.map.centerOn(marker);
+	};
+	
+	function fnValidateForm(){
+		
+		var error = "<span style='font-weight:bold'>The following fields can't be empty/insufficient to proceed further:</span> <br/>";
+        var count = 0;
+        var ids = [];
+        $(".form-group").removeClass("has-error");
+        
+        if ($("#txtShopName").val().trim() == "") {
+            count += 1;
+            error += "* Shop Name * <br />";
+            ids.push("#txtShopName");
+        }
+        
+        if ($("#txtShopDesc").val() == "") {
+        	count += 1;
+            error += "* Description * <br />";
+            ids.push("#txtShopDesc");
+        }
+        
+        if ($("#txtShopAddress").val() == "") {
+            count += 1;
+            error += "* Address * <br />";
+            ids.push("#txtShopAddress");
+        }
+        
+        if ($("#txtLatitude").val() == "") {
+        	count += 1;
+            error += "* Latitude * <br />";
+            ids.push("#txtLatitude");
+        }
+        
+        if ($("#txtLongitude").val() == "") {
+        	count += 1;
+            error += "* Longitude * <br />";
+            ids.push("#txtLongitude");
+        }
+        
+        if ($("#fileAttachment").val() == "") {
+        	count += 1;
+            error += "* Shop Image * <br />";
+            ids.push("#fileAttachment");
+        }
+	            
+		$(ids.join(',')).parents(".form-group").addClass("has-error");
+        if (count == 0){
+        	LoadingHelper(1, "Creating Shop detail. Please wait for a while...");
+            return true;
+        } else {
+            MsgShow("error", error);
+            return false;
+        }
+		
+	}
+	
+</script>
